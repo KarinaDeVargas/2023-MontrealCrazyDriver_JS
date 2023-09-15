@@ -1,0 +1,286 @@
+/*
+FSD10 - User Interfaces
+Final Project
+Group: Charlie
+    Claudiu || ID:
+    Sophie || ID:
+    Karina de Vargas Pereira || ID:2300594
+Date: September 15, 2023
+Description: html file for game "GAME NAME"
+*/
+
+
+
+
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+    font-family: "oswald", sans-serif;
+    color: #444444;
+  }
+  
+  a {
+    color: #111;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #747171;
+    text-decoration: none;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "oswald", sans-serif;
+  }
+  
+
+/*--------------------------------------------------------------
+# Header
+-------------------------------------------------------------- */
+#header {
+    background: #111;
+    transition: all 0.5s;
+    /* z-index: 997; */
+    padding: 15px 0;
+    /* box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08); */
+  }
+  
+  #header .logo {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  #header .logo a {
+    color: #afafaf;
+  }
+  
+  #header .logo img {
+    max-height: 40px;
+  }
+
+
+/*--------------------------------------------------------------
+# Separator
+-------------------------------------------------------------- */
+  
+.separatorSubject {
+    text-align: center;
+    background: #111;
+    padding: 10px 0;
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+    .separatorSubject {
+        margin: 0;
+    }
+}
+
+.separatorSubject h2 {
+font-family: "oswald";
+font-size: 32px;
+font-weight: 500;
+margin-top: 10px;
+}
+
+.separatorSubject p {
+font-family: "oswald";
+font-size: 14px;
+margin-bottom: 30px;
+}
+
+
+
+/*--------------------------------------------------------------
+# Board
+--------------------------------------------------------------*/
+#board {
+  background-color: lightgray;
+  border-bottom: 1px solid black;
+}
+
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+    color: #111;
+    font-size: 14px;
+    background: #fff;
+  }
+  
+  #footer .footer-top {
+    padding: 60px 0 30px 0;
+    background: #f9faf9;
+  }
+  
+  #footer .footer-top .footer-contact {
+    margin-bottom: 30px;
+  }
+  
+  #footer .footer-top .footer-contact h4 {
+    font-size: 22px;
+    margin: 0 0 30px 0;
+    padding: 2px 0 2px 0;
+    line-height: 1;
+    font-weight: 700;
+  }
+  
+  #footer .footer-top .footer-contact p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 0;
+    font-family: "Raleway", sans-serif;
+    color: #777777;
+  }
+  
+  #footer .footer-top h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444444;
+    position: relative;
+    padding-bottom: 12px;
+  }
+  
+  #footer .footer-top .footer-links {
+    margin-bottom: 30px;
+  }
+  
+  #footer .footer-top .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #footer .footer-top .footer-links ul i {
+    padding-right: 2px;
+    color: #111;
+    font-size: 18px;
+    line-height: 1;
+  }
+  
+  #footer .footer-top .footer-links ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  #footer .footer-top .footer-links ul li:first-child {
+    padding-top: 0;
+  }
+  
+  #footer .footer-top .footer-links ul a {
+    color: #777777;
+    transition: 0.3s;
+    display: inline-block;
+    line-height: 1;
+  }
+  
+  #footer .footer-top .footer-links ul a:hover {
+    text-decoration: none;
+    color: #747171;
+  }
+  
+  #footer .footer-newsletter {
+    font-size: 15px;
+  }
+  
+  #footer .footer-newsletter h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444444;
+    position: relative;
+    padding-bottom: 12px;
+  }
+  
+  #footer .footer-newsletter form {
+    margin-top: 30px;
+    background: #fff;
+    padding: 6px 10px;
+    position: relative;
+    border-radius: 50px;
+    text-align: left;
+    border: 1px solid #e0e5e2;
+  }
+  
+  #footer .footer-newsletter form input[type=email] {
+    border: 0;
+    padding: 4px 8px;
+    width: calc(100% - 100px);
+  }
+  
+  #footer .footer-newsletter form input[type=submit] {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 0 20px 2px 20px;
+    background: #111;
+    color: #fff;
+    transition: 0.3s;
+    border-radius: 50px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  #footer .footer-newsletter form input[type=submit]:hover {
+    background: #747171;
+  }
+  
+  #footer .credits {
+    padding-top: 5px;
+    font-size: 13px;
+    color: #111;
+  }
+  
+  #footer .credits a {
+    color: #111;
+    transition: 0.3s;
+  }
+  
+  #footer .credits a:hover {
+    color: #111;
+  }
+  
+  #footer .social-links a {
+    font-size: 18px;
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    line-height: 1;
+    padding: 8px 0;
+    margin-right: 4px;
+    border-radius: 50%;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    transition: 0.3s;
+  }
+  
+  #footer .social-links a:hover {
+    background: #747171;
+    color: #111;
+    text-decoration: none;
+  }
+
+
+
+
+
+
