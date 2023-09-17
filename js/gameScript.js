@@ -13,8 +13,8 @@ window.addEventListener('load', prepForm ); //onload event listener (same as Ste
 
 // Variables to define the board
 let board;
-let boardWidth = 750;
-let boardHeight = 250;
+let boardWidth = 1300;
+let boardHeight = 450;
 let context;
 
 // Variables to define the car
@@ -34,12 +34,12 @@ let car = {
 // Variables to define the Montreal cones
 let coneArray = [];
 
-let cone1Width = 82;
-let cone2Width = 82;
-let cone3Width = 82;
+let cone1Width = 41;
+let cone2Width = 41;
+let cone3Width = 41;
 
-let coneHeight = 101;
-let coneX = 700;
+let coneHeight = 50;
+let coneX = 1200;
 let coneY = boardHeight - coneHeight;
 
 let cone1Img;
@@ -47,12 +47,13 @@ let cone2Img;
 let cone3Img;
 
 // Variables related to the physics of the game 
-let velocityX = -5; //speed for the cones moving to the left (the orinal speed was -8, I thought it could be a little bit slower, so a switched to -5)
+let velocityX = -4; //speed for the cones moving to the left (the orinal speed was -8, I thought it could be a little bit slower, so a switched to -4)
 let velocityY = 0;
 let gravity = .4;
 
 let gameOver = false;
 let score = 0;
+
 
 function prepForm (){
     board = document.getElementById("board");
@@ -71,10 +72,10 @@ function prepForm (){
     cone1Img.src = "./img/cone1.png";
 
     cone2Img = new Image();
-    cone2Img.src = "./img/cone2.png"; // Charlie Group, we need to change this image
+    cone2Img.src = "./img/cone1.2.png"; // Charlie Group, we need to change this image
 
     cone3Img = new Image();
-    cone3Img.src = "./img/cone3.png"; // Charlie Group, we need to change this image
+    cone3Img.src = "./img/cone1.3.png"; // Charlie Group, we need to change this image
 
     requestAnimationFrame(update);
     setInterval(placeCone, 1000); //1000 milliseconds = 1 second
@@ -84,20 +85,46 @@ function prepForm (){
 
 function update() {
     requestAnimationFrame(update);
+    //If the car colides with the cone ther is no need to draw any image
+    if (gameOver) {  
+        return;
+    }
+    context.clearRect(0, 0, board.width, board.height);
     
-    //car
+    // Draw car image
+    velocityY += gravity;
+    car.y = Math.min(car.y + velocityY, carY); // gravity places role, current car.y does not exceed the ground
     context.drawImage(carImg, car.x, car.y, car.width, car.height);
 
-    //cone
+    // Draw cone image
     for (let i = 0; i < coneArray.length; i++) {
         let cone = coneArray[i];
+        cone.x += velocityX; // going negative is going to the left
         context.drawImage(cone.img, cone.x, cone.y, cone.width, cone.height);
     }
 }
 
+function moveCar(e){
+    if (gameOver) {
+        return;
+    }
+    
+    // Key events keyboard Space and Arrow Up
+    if ((e.code == "Space" || e.code == "ArrowUp") && car.y == carY) { // being car.y is the car object property and carY is the default y position of the car (car on the ground)
+        // when the car jumps
+        velocityY = -10;
+    }
+
+}
 
 function placeCone() { 
-    //
+   
+    //If the car colides with the cone ther is no need to place any cones
+    if (gameOver) {  
+        return;
+    }
+   
+    //place the cone in the board
     let cone = {
         img : null,
         x : coneX,
@@ -124,12 +151,18 @@ function placeCone() {
         coneArray.push(cone);
     } 
 
-    if (coneArray.length > 5) {
+    // avoid accumulation of cones images to save memory - cactus that passed are not going to be use any more
+    if (coneArray.length > 8) {
         coneArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
     }
 }
 
 
 
-// I've stop here: 21:14 
+
+
+
+
+// I've stop here: 30:14
+
 // https://www.youtube.com/watch?v=lgck-txzp9o 
