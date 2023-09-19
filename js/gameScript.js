@@ -71,7 +71,7 @@ function prepForm() {
   cone1Img.src = "./img/cone1.png";
 
   cone2Img = new Image();
-  cone2Img.src = "./img/cone1.2.png";
+  cone2Img.src = "./img/cone2.png";
 
   // Poutine image
   cone3Img = new Image();
@@ -104,11 +104,24 @@ function update() {
     if (detectCrash(car, cone)) {
       gameOver = true;
       carImg.src = "./img/crashed.png"; // Charlie Group, we need to change this image
+      alert("BOOM ‼️ Game over ‼️ \nYour score is " + score);
       carImg.onload = function () {
         context.drawImage(carImg, car.x, car.y, car.width, car.height);
       };
+    } else if (cone.x + cone.width < car.x && !cone.passed) {
+      // Car successfully avoided the cone
+      cone.passed = true;
+      increaseScore(); // Increase the score
     }
   }
+  // Display the score
+  context.font = "30px Arial";
+  context.fillStyle = "black";
+  context.fillText("Score: " + score, 20, 30);
+}
+
+function increaseScore() {
+  score += 10; // Increase the score by 10 (you can adjust this value)
 }
 
 function moveCar(e) {
@@ -172,76 +185,3 @@ function detectCrash(a, b) {
     a.y + a.height > b.y
   ); //
 }
-
-let score = 0; // Initialize the score variable
-
-
-
-
-function update() {
-    requestAnimationFrame(update);
-
-
-
-
-    if (gameOver) {
-        return;
-    }
-
-
-
-
-    context.clearRect(0, 0, board.width, board.height);
-
-
-
-
-    velocityY += gravity;
-    car.y = Math.min(car.y + velocityY, carY);
-    context.drawImage(carImg, car.x, car.y, car.width, car.height);
-
-
-
-
-    for (let i = 0; i < coneArray.length; i++) {
-        let cone = coneArray[i];
-        cone.x += velocityX;
-        context.drawImage(cone.img, cone.x, cone.y, cone.width, cone.height);
-
-
-
-
-        if (detectCollision(car, cone)) {
-            gameOver = true;
-            carImg.src = "./img/carTrashed.png";
-            carImg.onload = function () {
-                context.drawImage(carImg, car.x, car.y, car.width, car.height);
-            };
-        } else if (cone.x + cone.width < car.x && !cone.passed) {
-            // Car successfully avoided the cone
-            cone.passed = true;
-            increaseScore(); // Increase the score
-        }
-    }
-
-
-
-
-    // Display the score
-    context.font = "30px Arial";
-    context.fillStyle = "white";
-    context.fillText("Score: " + score, 20, 30);
-}
-
-
-
-
-function increaseScore() {
-    score += 10; // Increase the score by 10 (you can adjust this value)
-}
-
-// collision function added, however it needs to find a way of deleting the normal car behind the trashed car.
-
-// stopped at 37:10
-
-// https://www.youtube.com/watch?v=lgck-txzp9o
