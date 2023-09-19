@@ -14,11 +14,11 @@ window.addEventListener('load', prepForm ); //onload event listener (same as Ste
 // Variables to define the board
 let board;
 let boardWidth = 1300;
-let boardHeight = 450;
+let boardHeight = 350;
 let context;
 
 // Variables to define the car
-let carWidth = 100;
+let carWidth = 148;
 let carHeight = 100;
 let carX = 50;
 let carY = boardHeight - carHeight;
@@ -34,8 +34,8 @@ let car = {
 // Variables to define the Montreal cones
 let coneArray = [];
 
-let cone1Width = 41;
-let cone2Width = 41;
+let cone1Width = 30;
+let cone2Width = 70;
 let cone3Width = 41;
 
 let coneHeight = 50;
@@ -47,7 +47,7 @@ let cone2Img;
 let cone3Img;
 
 // Variables related to the physics of the game 
-let velocityX = -4; //speed for the cones moving to the left (the orinal speed was -8, I thought it could be a little bit slower, so a switched to -4)
+let velocityX = -8; //speed for the cones moving to the left (the orinal speed was -8, I thought it could be a little bit slower, so a switched to -4)
 let velocityY = 0;
 let gravity = .4;
 
@@ -63,7 +63,7 @@ function prepForm (){
     context = board.getContext("2d"); //used for drawing on the board
 
     carImg = new Image();
-    carImg.src = "./img/green_car.jpg";
+    carImg.src = "./img/car01.png";
     carImg.onload = function() {
         context.drawImage(carImg, car.x, car.y, car.width, car.height);
     }
@@ -72,7 +72,7 @@ function prepForm (){
     cone1Img.src = "./img/cone1.png";
 
     cone2Img = new Image();
-    cone2Img.src = "./img/cone1.2.png"; // Charlie Group, we need to change this image
+    cone2Img.src = "./img/cone1.1.jpg";
 
     cone3Img = new Image();
     cone3Img.src = "./img/cone1.3.png"; // Charlie Group, we need to change this image
@@ -101,6 +101,14 @@ function update() {
         let cone = coneArray[i];
         cone.x += velocityX; // going negative is going to the left
         context.drawImage(cone.img, cone.x, cone.y, cone.width, cone.height);
+
+        if (detectCollision(car, cone)) {
+            gameOver = true;
+            carImg.src = "./img/carTrashed.png"; // Charlie Group, we need to change this image
+            carImg.onload = function(){
+                context.drawImage(carImg, car.x, car.y, car.width, car.height);
+            }
+        }
     }
 }
 
@@ -157,12 +165,19 @@ function placeCone() {
     }
 }
 
+function detectCollision (a, b) {
+    return a.x < b.x + b.width && // 
+           a.x + a.width > b.x && // 
+           a.y < b.y + b.height && // 
+           a.y + a.height > b.y; //  
+}
 
 
 
 
 
+// collision function added, however it needs to find a way of deleting the normal car behind the trashed car.
 
-// I've stop here: 30:14
+// stopped at 37:10
 
 // https://www.youtube.com/watch?v=lgck-txzp9o 
