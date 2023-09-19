@@ -13,8 +13,9 @@ Description: html file for game "GAME NAME"
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "oswald", sans-serif;
-  color: #444444;
+  font-family: monospace;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 a {
@@ -33,7 +34,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "oswald", sans-serif;
+  font-family: monospace;
   margin-top: 15px;
 }
 
@@ -87,14 +88,14 @@ h6 {
 }
 
 .separatorSubject h2 {
-  font-family: "oswald";
+  font-family: monospace;
   font-size: 32px;
   font-weight: 500;
   margin-top: 10px;
 }
 
 .separatorSubject p {
-  font-family: "oswald";
+  font-family: monospace;
   font-size: 14px;
   margin-bottom: 30px;
 }
@@ -103,8 +104,8 @@ h6 {
 # Board
 --------------------------------------------------------------*/
 #board {
-  background-color: lightgray;
-  border-bottom: 1px solid black;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
   margin-top: 10px;
   position: relative;
 }
@@ -113,14 +114,14 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  color: #111;
+  /* color: #ffffff; */
   font-size: 14px;
-  background: #fff;
+  background: #e69315e4;
 }
 
-#footer .footer-top {
-  padding: 60px 0 30px 0;
-  background: #f9faf9;
+/* #footer .footer-top {
+  padding: 10px 0 10px 0;
+  background: #e78c04;
 }
 
 #footer .footer-top .footer-contact {
@@ -139,8 +140,8 @@ h6 {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
-  color: #777777;
+  font-family: monospace;
+  color: #000000;
 }
 
 #footer .footer-top h4 {
@@ -179,7 +180,7 @@ h6 {
 }
 
 #footer .footer-top .footer-links ul a {
-  color: #777777;
+  color: #000000;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
@@ -250,14 +251,19 @@ h6 {
 }
 
 #footer .credits a:hover {
-  color: #111;
+  color: #111; */
+/* } */
+
+.copyright {
+  color: #000000;
+  font-family: monospace;
 }
 
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
   background: #111;
-  color: #fff;
+  color: #de6705;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;

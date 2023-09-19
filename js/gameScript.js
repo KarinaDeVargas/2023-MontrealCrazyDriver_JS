@@ -13,7 +13,7 @@ window.addEventListener("load", prepForm); //onload event listener (same as Step
 
 // Variables to define the board
 let board;
-let boardWidth = 1300;
+let boardWidth = 900;
 let boardHeight = 350;
 let context;
 
@@ -34,9 +34,9 @@ let car = {
 // Variables to define the Montreal cones
 let coneArray = [];
 
-let cone1Width = 30;
-let cone2Width = 70;
-let cone3Width = 41;
+let cone1Width = 40;
+let cone2Width = 100;
+let cone3Width = 40;
 
 let coneHeight = 50;
 let coneX = 1200;
@@ -62,7 +62,7 @@ function prepForm() {
   context = board.getContext("2d"); //used for drawing on the board
 
   carImg = new Image();
-  carImg.src = "./img/car01.png";
+  carImg.src = "./img/red_car.png";
   carImg.onload = function () {
     context.drawImage(carImg, car.x, car.y, car.width, car.height);
   };
@@ -71,10 +71,11 @@ function prepForm() {
   cone1Img.src = "./img/cone1.png";
 
   cone2Img = new Image();
-  cone2Img.src = "./img/cone1.1.jpg";
+  cone2Img.src = "./img/cone1.2.png";
 
+  // Poutine image
   cone3Img = new Image();
-  cone3Img.src = "./img/cone1.3.png"; // Charlie Group, we need to change this image
+  cone3Img.src = "./img/poutine.jpeg"; // Charlie Group, attemping using poutine
 
   requestAnimationFrame(update);
   setInterval(placeCone, 1000); //1000 milliseconds = 1 second
@@ -100,9 +101,9 @@ function update() {
     cone.x += velocityX; // going negative is going to the left
     context.drawImage(cone.img, cone.x, cone.y, cone.width, cone.height);
 
-    if (detectCollision(car, cone)) {
+    if (detectCrash(car, cone)) {
       gameOver = true;
-      carImg.src = "./img/carTrashed.png"; // Charlie Group, we need to change this image
+      carImg.src = "./img/crashed.png"; // Charlie Group, we need to change this image
       carImg.onload = function () {
         context.drawImage(carImg, car.x, car.y, car.width, car.height);
       };
@@ -148,12 +149,12 @@ function placeCone() {
   } else if (placeConeRandom > 0.7) {
     //30% chance you get a cone2
     cone.img = cone2Img;
-    cone.width = cone3Width;
+    cone.width = cone2Width;
     coneArray.push(cone);
   } else if (placeConeRandom > 0.5) {
     //50% chance you get a cone1
     cone.img = cone1Img;
-    cone.width = cone3Width;
+    cone.width = cone1Width;
     coneArray.push(cone);
   }
 
@@ -163,7 +164,7 @@ function placeCone() {
   }
 }
 
-function detectCollision(a, b) {
+function detectCrash(a, b) {
   return (
     a.x < b.x + b.width && //
     a.x + a.width > b.x && //
