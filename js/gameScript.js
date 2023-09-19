@@ -2,7 +2,7 @@
 FSD10 - User Interfaces
 Final Project
 Group: Charlie
-    Claudiu || ID:
+    Claudiu Mihael Terenche || ID:6268599
     Sophie || ID: 0754336
     Karina de Vargas Pereira || ID:2300594
 Date: September 15, 2023
@@ -170,6 +170,73 @@ function detectCollision(a, b) {
     a.y < b.y + b.height && //
     a.y + a.height > b.y
   ); //
+}
+
+let score = 0; // Initialize the score variable
+
+
+
+
+function update() {
+    requestAnimationFrame(update);
+
+
+
+
+    if (gameOver) {
+        return;
+    }
+
+
+
+
+    context.clearRect(0, 0, board.width, board.height);
+
+
+
+
+    velocityY += gravity;
+    car.y = Math.min(car.y + velocityY, carY);
+    context.drawImage(carImg, car.x, car.y, car.width, car.height);
+
+
+
+
+    for (let i = 0; i < coneArray.length; i++) {
+        let cone = coneArray[i];
+        cone.x += velocityX;
+        context.drawImage(cone.img, cone.x, cone.y, cone.width, cone.height);
+
+
+
+
+        if (detectCollision(car, cone)) {
+            gameOver = true;
+            carImg.src = "./img/carTrashed.png";
+            carImg.onload = function () {
+                context.drawImage(carImg, car.x, car.y, car.width, car.height);
+            };
+        } else if (cone.x + cone.width < car.x && !cone.passed) {
+            // Car successfully avoided the cone
+            cone.passed = true;
+            increaseScore(); // Increase the score
+        }
+    }
+
+
+
+
+    // Display the score
+    context.font = "30px Arial";
+    context.fillStyle = "white";
+    context.fillText("Score: " + score, 20, 30);
+}
+
+
+
+
+function increaseScore() {
+    score += 10; // Increase the score by 10 (you can adjust this value)
 }
 
 // collision function added, however it needs to find a way of deleting the normal car behind the trashed car.
