@@ -6,7 +6,7 @@ Group: Charlie
     Sophie || ID: 0754336
     Karina de Vargas Pereira || ID:2300594
 Date: September 15, 2023
-Description: html file for game "GAME NAME"
+Description: html file for game "Montreal Crazy Driver"
 */
 
 /*--------------------------------------------------------------
@@ -16,6 +16,10 @@ body {
   font-family: monospace;
   color: #000000;
   background-color: #ffffff;
+  height: 100%;
+  min-height: 100%;
+  padding-bottom: 20px;
+  border: 1px solid transparent;
 }
 
 a {
@@ -35,43 +39,10 @@ h4,
 h5,
 h6 {
   font-family: monospace;
-  margin-top: 15px;
+  margin-top: 20px;
 }
-
 /*--------------------------------------------------------------
-# Header
--------------------------------------------------------------- */
-/*
-#header {
-    background: #111;
-    transition: all 0.5s;
-    z-index: 997;
-    padding: 15px 0;
-    box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08);
-  }
-  
-  #header .logo {
-    font-size: 30px;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  #header .logo a {
-    color: #afafaf;
-  }
-  
-  #header .logo img {
-    max-height: 40px;
-  }
-  */
-
-/*--------------------------------------------------------------
-# Separator
+# Separator/ TOP HEADER
 -------------------------------------------------------------- */
 
 .separatorSubject {
@@ -81,7 +52,7 @@ h6 {
   color: #fff;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 900px) {
   .separatorSubject {
     margin: 0;
   }
@@ -117,146 +88,14 @@ h6 {
   /* color: #ffffff; */
   font-size: 14px;
   background: #e69315e4;
+  max-width: 100%;
+  max-height: 100%;
 }
-
-/* #footer .footer-top {
-  padding: 10px 0 10px 0;
-  background: #e78c04;
-}
-
-#footer .footer-top .footer-contact {
-  margin-bottom: 30px;
-}
-
-#footer .footer-top .footer-contact h4 {
-  font-size: 22px;
-  margin: 0 0 30px 0;
-  padding: 2px 0 2px 0;
-  line-height: 1;
-  font-weight: 700;
-}
-
-#footer .footer-top .footer-contact p {
-  font-size: 14px;
-  line-height: 24px;
-  margin-bottom: 0;
-  font-family: monospace;
-  color: #000000;
-}
-
-#footer .footer-top h4 {
-  font-size: 16px;
-  font-weight: bold;
-  color: #444444;
-  position: relative;
-  padding-bottom: 12px;
-}
-
-#footer .footer-top .footer-links {
-  margin-bottom: 30px;
-}
-
-#footer .footer-top .footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#footer .footer-top .footer-links ul i {
-  padding-right: 2px;
-  color: #111;
-  font-size: 18px;
-  line-height: 1;
-}
-
-#footer .footer-top .footer-links ul li {
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-}
-
-#footer .footer-top .footer-links ul li:first-child {
-  padding-top: 0;
-}
-
-#footer .footer-top .footer-links ul a {
-  color: #000000;
-  transition: 0.3s;
-  display: inline-block;
-  line-height: 1;
-}
-
-#footer .footer-top .footer-links ul a:hover {
-  text-decoration: none;
-  color: #747171;
-}
-
-#footer .footer-newsletter {
-  font-size: 15px;
-}
-
-#footer .footer-newsletter h4 {
-  font-size: 16px;
-  font-weight: bold;
-  color: #444444;
-  position: relative;
-  padding-bottom: 12px;
-}
-
-#footer .footer-newsletter form {
-  margin-top: 30px;
-  background: #fff;
-  padding: 6px 10px;
-  position: relative;
-  border-radius: 50px;
-  text-align: left;
-  border: 1px solid #e0e5e2;
-}
-
-#footer .footer-newsletter form input[type="email"] {
-  border: 0;
-  padding: 4px 8px;
-  width: calc(100% - 100px);
-}
-
-#footer .footer-newsletter form input[type="submit"] {
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  bottom: -1px;
-  border: 0;
-  background: none;
-  font-size: 16px;
-  padding: 0 20px 2px 20px;
-  background: #111;
-  color: #fff;
-  transition: 0.3s;
-  border-radius: 50px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-}
-
-#footer .footer-newsletter form input[type="submit"]:hover {
-  background: #747171;
-}
-
-#footer .credits {
-  padding-top: 5px;
-  font-size: 13px;
-  color: #111;
-}
-
-#footer .credits a {
-  color: #111;
-  transition: 0.3s;
-}
-
-#footer .credits a:hover {
-  color: #111; */
-/* } */
-
 .copyright {
   color: #000000;
   font-family: monospace;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #footer .social-links a {

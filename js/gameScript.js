@@ -6,11 +6,12 @@ Group: Charlie
     Sophie || ID: 0754336
     Karina de Vargas Pereira || ID:2300594
 Date: September 15, 2023
-Description: js file for game "GAME NAME"
+Description: js file for game "Montreal Crazy Driver"
 */
 
-window.addEventListener("load", prepForm); //onload event listener (same as Stephanie uses)
+window.addEventListener("load", game); //onload event listener (same as Stephanie uses)
 
+/* -----------------------------Variables-----------------------------------*/
 // Variables to define the board
 let board;
 let boardWidth = 900;
@@ -31,22 +32,22 @@ let car = {
   height: carHeight,
 };
 
-// Variables to define the Montreal cones
-let coneArray = [];
+// Variables to define the Montreal cones + poutine
+let itemArray = [];
 
 let cone1Width = 40;
 let cone2Width = 100;
-let cone3Width = 40;
+let poutineWidth = 40;
 
-let coneHeight = 50;
+let itemHeight = 50;
 let coneX = 1200;
-let coneY = boardHeight - coneHeight;
+let coneY = boardHeight - itemHeight;
 
 let cone1Img;
 let cone2Img;
-let cone3Img;
+let poutineImg;
 
-// Variables related to the physics of the game
+// Game physics variables
 let velocityX = -8; //speed for the cones moving to the left (the orinal speed was -8, I thought it could be a little bit slower, so a switched to -4)
 let velocityY = 0;
 let gravity = 0.4;
@@ -54,19 +55,22 @@ let gravity = 0.4;
 let gameOver = false;
 let score = 0;
 
-function prepForm() {
+/* -----------------------------Main Game-----------------------------------*/
+// Main function of the game
+function game() {
   board = document.getElementById("board");
   board.height = boardHeight;
   board.width = boardWidth;
 
   context = board.getContext("2d"); //used for drawing on the board
 
+  // Car image
   carImg = new Image();
   carImg.src = "./img/red_car.png";
   carImg.onload = function () {
     context.drawImage(carImg, car.x, car.y, car.width, car.height);
   };
-
+  // Cone images
   cone1Img = new Image();
   cone1Img.src = "./img/cone1.png";
 
@@ -74,20 +78,20 @@ function prepForm() {
   cone2Img.src = "./img/cone2.png";
 
   // Poutine image
-  cone3Img = new Image();
-  cone3Img.src = "./img/poutine.jpeg"; // Charlie Group, attemping using poutine
+  poutineImg = new Image();
+  poutineImg.src = "./img/poutine.jpeg"; // Charlie Group, attemping using poutine
 
+  // Method to tell browser to perform an animation
   requestAnimationFrame(update);
-  setInterval(placeCone, 1000); //1000 milliseconds = 1 second
+
+  // Method to place cones or poutine
+  setInterval(placeItem, 1000); //1000 milliseconds = 1 second
   document.addEventListener("keydown", moveCar);
 }
 
+// Main function of the gameplay
 function update() {
-  requestAnimationFrame(update);
-  //If the car colides with the cone ther is no need to draw any image
-  if (gameOver) {
-    return;
-  }
+  //If the car crashes with the cone, there's no need to draw any image
   context.clearRect(0, 0, board.width, board.height);
 
   // Draw car image
@@ -95,93 +99,124 @@ function update() {
   car.y = Math.min(car.y + velocityY, carY); // gravity places role, current car.y does not exceed the ground
   context.drawImage(carImg, car.x, car.y, car.width, car.height);
 
-  // Draw cone image
-  for (let i = 0; i < coneArray.length; i++) {
-    let cone = coneArray[i];
-    cone.x += velocityX; // going negative is going to the left
-    context.drawImage(cone.img, cone.x, cone.y, cone.width, cone.height);
+  // Draw item image
+  for (let i = 0; i < itemArray.length; i++) {
+    let item = itemArray[i];
+    item.x += velocityX; // going negative is going to the left
+    context.drawImage(item.img, item.x, item.y, item.width, item.height);
 
-    if (detectCrash(car, cone)) {
-      gameOver = true;
-      carImg.src = "./img/crashed.png"; // Charlie Group, we need to change this image
-      alert("BOOM ‼️ Game over ‼️ \nYour score is " + score);
-      carImg.onload = function () {
-        context.drawImage(carImg, car.x, car.y, car.width, car.height);
-      };
-    } else if (cone.x + cone.width < car.x && !cone.passed) {
-      // Car successfully avoided the cone
-      cone.passed = true;
-      increaseScore(); // Increase the score
+    // Detect collision
+    if (detectCrash(car, item) && item.type) {
+      if (item.type == "poutine") {
+        if (!item.passed) {
+          item.passed = true;
+          increaseScore();
+        }
+      } else {
+        gameOver = true;
+        carImg.src = "./img/crashed.png";
+        carImg.onload = function () {
+          context.drawImage(carImg, car.x, car.y, car.width, car.height);
+          setTimeout(function () {
+            alert("BOOM ‼️ Game over ‼️ \nYour score is " + score);
+          }, 100);
+        };
+      }
+    } else if (item.x + item.width < car.x && !item.passed) {
+      if (item.type == "cone") {
+        // Car successfully avoided the cone
+        item.passed = true;
+        increaseScore(); // Increase the score
+      }
     }
   }
   // Display the score
-  context.font = "30px Arial";
+  context.font = "30px monospace";
   context.fillStyle = "black";
   context.fillText("Score: " + score, 20, 30);
+
+  if (gameOver) {
+    return;
+  } else {
+    requestAnimationFrame(update);
+  }
 }
 
+/* -----------------------------Functions for the game-----------------------------------*/
+// Increase Score function
 function increaseScore() {
   score += 10; // Increase the score by 10 (you can adjust this value)
 }
 
+// Move car Function
 function moveCar(e) {
   if (gameOver) {
     return;
   }
 
-  // Key events keyboard Space and Arrow Up
-  if ((e.code == "Space" || e.code == "ArrowUp") && car.y == carY) {
+  // Key events keyboard Space
+  if (e.code == "Space" && car.y == carY) {
     // being car.y is the car object property and carY is the default y position of the car (car on the ground)
     // when the car jumps
     velocityY = -10;
   }
 }
 
-function placeCone() {
-  //If the car colides with the cone ther is no need to place any cones
+// Place Items function
+function placeItem() {
+  //If the car crashes with the cone, there's no need to draw any image
   if (gameOver) {
     return;
   }
 
-  //place the cone in the board
   let cone = {
     img: null,
     x: coneX,
     y: coneY,
     width: null,
-    height: coneHeight,
+    height: itemHeight,
+    type: "cone",
+    passed: false,
   };
 
-  let placeConeRandom = Math.random(); //
+  let poutine = {
+    img: null,
+    x: coneX,
+    y: coneY,
+    width: null,
+    height: itemHeight,
+    type: "poutine",
+    passed: false,
+  };
 
-  if (placeConeRandom > 0.9) {
-    // 10% chance you get a cone3
-    cone.img = cone3Img;
-    cone.width = cone3Width;
-    coneArray.push(cone);
-  } else if (placeConeRandom > 0.7) {
-    //30% chance you get a cone2
+  let placeRandomItem = Math.random();
+
+  if (placeRandomItem > 0.8) {
+    poutine.img = poutineImg;
+    poutine.width = poutineWidth;
+    itemArray.push(poutine);
+  } else if (placeRandomItem > 0.7) {
     cone.img = cone2Img;
     cone.width = cone2Width;
-    coneArray.push(cone);
-  } else if (placeConeRandom > 0.5) {
-    //50% chance you get a cone1
+    itemArray.push(cone);
+  } else if (placeRandomItem > 0.5) {
     cone.img = cone1Img;
     cone.width = cone1Width;
-    coneArray.push(cone);
+    itemArray.push(cone);
   }
 
-  // avoid accumulation of cones images to save memory - cactus that passed are not going to be use any more
-  if (coneArray.length > 8) {
-    coneArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
+  // Avoid accumulation of cones and poutine images to save memory
+  if (itemArray.length > 8) {
+    itemArray.shift(); //remove the first element from the array
   }
 }
 
+// Detect collision function
 function detectCrash(a, b) {
   return (
-    a.x < b.x + b.width && //
-    a.x + a.width > b.x && //
-    a.y < b.y + b.height && //
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
     a.y + a.height > b.y
-  ); //
+  );
 }
