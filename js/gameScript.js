@@ -3,7 +3,7 @@ FSD10 - User Interfaces
 Final Project
 Group: Charlie
     Claudiu Mihael Terenche || ID:6268599
-    Sophie || ID: 0754336
+    Sophie Hsu || ID: 0754336
     Karina de Vargas Pereira || ID:2300594
 Date: September 15, 2023
 Description: js file for game "Montreal Crazy Driver"
