@@ -16,7 +16,7 @@ window.addEventListener("load", game); //onload event listener (same as Stephani
 let board;
 let boardWidth = 900;
 let boardHeight = 350;
-let context;
+let data;
 
 // Variables to define the car
 let carWidth = 148;
@@ -84,13 +84,13 @@ function game() {
   board.height = boardHeight;
   board.width = boardWidth;
 
-  context = board.getContext("2d"); //used for drawing on the board
+  data = board.getContext("2d"); //used for drawing on the board
 
   // Car image
   carImg = new Image();
   carImg.src = "./img/red_car.png";
   carImg.onload = function () {
-    context.drawImage(carImg, car.x, car.y, car.width, car.height);
+    data.drawImage(carImg, car.x, car.y, car.width, car.height);
   };
   // Cone images
   cone1Img = new Image();
@@ -116,18 +116,18 @@ function game() {
 // Main function of the gameplay
 function update() {
   //If the car crashes with the cone, there's no need to draw any image
-  context.clearRect(0, 0, board.width, board.height);
+  data.clearRect(0, 0, board.width, board.height);
 
   // Draw car image
   velocityY += gravity;
   car.y = Math.min(car.y + velocityY, carY); // gravity places role, current car.y does not exceed the ground
-  context.drawImage(carImg, car.x, car.y, car.width, car.height);
+  data.drawImage(carImg, car.x, car.y, car.width, car.height);
 
   // Draw item image
   for (let i = 0; i < itemArray.length; i++) {
     let item = itemArray[i];
     item.x += velocityX; // going negative is going to the left
-    context.drawImage(item.img, item.x, item.y, item.width, item.height);
+    data.drawImage(item.img, item.x, item.y, item.width, item.height);
 
     // Detect collision
     if (detectCrash(car, item) && item.type) {
@@ -140,7 +140,7 @@ function update() {
         gameOver = true;
         carImg.src = "./img/crashed.png";
         carImg.onload = function () {
-          context.drawImage(carImg, car.x, car.y, car.width, car.height);
+          data.drawImage(carImg, car.x, car.y, car.width, car.height);
           setTimeout(function () {
             alert("BOOM ‼️ Game over ‼️ \nYour score is " + score);
           }, 100);
@@ -155,9 +155,9 @@ function update() {
     }
   }
   // Display the score
-  context.font = "30px monospace";
-  context.fillStyle = "black";
-  context.fillText("Score: " + score, 20, 30);
+  data.font = "30px monospace";
+  data.fillStyle = "black";
+  data.fillText("Score: " + score, 20, 30);
 
   if (gameOver) {
     return;
