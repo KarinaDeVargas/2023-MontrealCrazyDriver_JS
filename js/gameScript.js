@@ -55,6 +55,28 @@ let gravity = 0.4;
 let gameOver = false;
 let score = 0;
 
+function setVariables() {
+  // Variables to define the car
+  carWidth = 148;
+  carHeight = 100;
+  carX = 50;
+  carY = boardHeight - carHeight;
+
+  car = {
+    x: carX,
+    y: carY,
+    width: carWidth,
+    height: carHeight,
+  };
+
+  itemHeight = 50;
+  coneX = 1200;
+  coneY = boardHeight - itemHeight;
+
+  gameOver = false;
+  score = 0;
+}
+
 /* -----------------------------Main Game-----------------------------------*/
 // Main function of the game
 function game() {
@@ -86,6 +108,8 @@ function game() {
 
   // Method to place cones or poutine
   setInterval(placeItem, 1000); //1000 milliseconds = 1 second
+
+  // Add event listener for keyboard press
   document.addEventListener("keydown", moveCar);
 }
 
@@ -155,10 +179,12 @@ function moveCar(e) {
   }
 
   // Key events keyboard Space
-  if (e.code == "Space" && car.y == carY) {
-    // being car.y is the car object property and carY is the default y position of the car (car on the ground)
-    // when the car jumps
-    velocityY = -10;
+  if (e.code == "Space") {
+    if (car.y == carY) {
+      // being car.y is the car object property and carY is the default y position of the car (car on the ground)
+      // when the car jumps
+      velocityY = -10;
+    }
   }
 }
 
@@ -220,3 +246,9 @@ function detectCrash(a, b) {
     a.y + a.height > b.y
   );
 }
+
+document.addEventListener("keydown", function (e) {
+  if (e.code == "Space" && gameOver) {
+    this.location.reload();
+  }
+});
