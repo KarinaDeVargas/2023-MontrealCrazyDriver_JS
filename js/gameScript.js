@@ -135,6 +135,8 @@ function update() {
         if (!item.passed) {
           item.passed = true;
           increaseScore();
+          // Remove the poutine from the array
+          itemArray.splice(i, 1);
         }
       } else {
         gameOver = true;
