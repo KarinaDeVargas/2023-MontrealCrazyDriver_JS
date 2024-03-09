@@ -34,15 +34,9 @@ This website is built using the following technologies and frameworks:
 
 ## ScreenShoots - Game
 
-<img src="https://github.com/KarinaDeVargas/2023-FSD10-MontrealCrazyDriver_UI/blob/main/img/GameInitial.png" alt="Screenshot 1" width="300"/>
+<img src="https://github.com/KarinaDeVargas/2023-FSD10-MontrealCrazyDriver_UI/blob/main/img/GameInitial.png" alt="Screenshot 1" width="350"/>
 
+<img src="https://github.com/KarinaDeVargas/2023-FSD10-MontrealCrazyDriver_UI/blob/main/img/CarCrash.png" alt="Screenshot 1" width="350"/>
 
-## ScreenShoots - Car Crash
-
-<img src="https://github.com/KarinaDeVargas/2023-FSD10-MontrealCrazyDriver_UI/blob/main/img/CarCrash.png" alt="Screenshot 1" width="300"/>
-
-
-## ScreenShoots - Car Crash
-
-<img src="https://github.com/KarinaDeVargas/2023-FSD10-MontrealCrazyDriver_UI/blob/main/img/CarCrash_2.png" alt="Screenshot 1" width="300"/>
+<img src="https://github.com/KarinaDeVargas/2023-FSD10-MontrealCrazyDriver_UI/blob/main/img/CarCrash_2.png" alt="Screenshot 1" width="350"/>
 
